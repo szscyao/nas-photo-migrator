@@ -33,6 +33,18 @@
 
 ---
 
+## 界面预览
+
+<p align="center">
+  <img src="docs/screenshots/01-home.jpg" width="30%" alt="首页：迁移完成态" />
+  <img src="docs/screenshots/02-neighbor.jpg" width="30%" alt="网络邻居：本网段扫描" />
+  <img src="docs/screenshots/03-auth.jpg" width="30%" alt="设备需要账号密码" />
+</p>
+
+<p align="center"><sub>左：首页迁移完成态（已释放 874 MB）· 中：本网段自动扫描发现设备 · 右：设备需要认证时弹窗输入账号密码</sub></p>
+
+---
+
 ## 二、功能一览
 
 | 模块 | 功能 |
