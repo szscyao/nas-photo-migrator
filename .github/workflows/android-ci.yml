@@ -21,17 +21,26 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Accept SDK licenses
-        run: yes | sdkmanager --licenses || true
+      # ubuntu-latest runner 已预装 Android SDK（ANDROID_SDK_ROOT=/usr/local/lib/android/sdk），
+      # 不再使用第三方 setup-android action（其下载 cmdline-tools 的步骤在 2026 年 runner 上不稳定）。
+      - name: Accept Android SDK licenses
+        run: |
+          SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+          echo "SDK root: $SDK_ROOT"
+          ls "$SDK_ROOT" || true
+          if [ -x "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" ]; then
+            yes | "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          elif command -v sdkmanager >/dev/null 2>&1; then
+            yes | sdkmanager --licenses > /dev/null || true
+          else
+            echo "sdkmanager not found, gradle will try to auto-install"
+          fi
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Build debug APK
-        run: ./gradlew :app:assembleDebug --no-daemon
+        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
 
       - name: Run unit tests
         run: ./gradlew :app:testDebugUnitTest --no-daemon
