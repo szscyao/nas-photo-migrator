@@ -227,10 +227,10 @@ gradlew.bat :app:assembleRelease
 # 产物：app/build/outputs/apk/release/app-release.apk
 ```
 
-安装包不入库（`.gitignore` 已排除 `/release/`），可直接从 Releases 页面下载已验证的发布包：
-[**NAS-Photo-Migrator v1.1.0 正式签名包**](https://github.com/szscyao/nas-photo-migrator/releases/tag/v1.1.0)（GitHub 附件名 `app-release.apk`）
+安装包不入库（`.gitignore` 已排除 `/release/`），可直接下载已验证的发布包：
+[**NAS-Photo-Migrator-v1.1.0.apk**](https://github.com/szscyao/nas-photo-migrator/releases/download/v1.1.0/NAS-Photo-Migrator-v1.1.0.apk)
 （包名 `com.nasphoto.migrator`，versionCode 2 / versionName 1.1.0，minSdk 29 / targetSdk 35，
-APK Signature Scheme v2 已签名，约 50.2 MB）。
+APK Signature Scheme v2 已签名，50.2 MB；SHA-256 `444D96633073F99CAACEF445B5EF4CDBE7CFAEAC8D69421B811F110E7781B1DC`）。
 
 | 签名信息 | 值 |
 |---|---|
