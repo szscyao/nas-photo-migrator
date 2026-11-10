@@ -1,5 +1,8 @@
 # 相册逐张边传边删迁移 NAS 工具（NAS Photo Migrator）
 
+[![Android CI](https://github.com/szscyao/nas-photo-migrator/actions/workflows/android-ci.yml/badge.svg)](https://github.com/szscyao/nas-photo-migrator/actions/workflows/android-ci.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+
 > Android 原生（Kotlin）· minSdk 29（Android 10）· SMB/CIFS + WebDAV · 纯本地、无账号、不联网除 NAS 之外任何地址
 > 许可证：[Apache License 2.0](LICENSE) · 持续集成：[Android CI](.github/workflows/android-ci.yml)
 >
