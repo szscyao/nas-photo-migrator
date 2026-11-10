@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 应用基础信息 -->
+    <string name="app_name">相册迁移NAS</string>
+    <string name="app_name_full">相册逐张边传边删迁移NAS工具</string>
+
+    <!-- ============ 前台服务通知 ============ -->
+    <string name="notif_channel_migration_name">相册迁移进度</string>
+    <string name="notif_channel_migration_desc">显示迁移进度、已释放空间与当前文件</string>
+    <string name="notif_title_running">正在逐张迁移相册</string>
+    <string name="notif_title_paused">迁移已暂停</string>
+    <string name="notif_title_completed">迁移完成</string>
+    <string name="notif_title_stopped">迁移已停止</string>
+    <string name="notif_title_waiting">等待网络/条件恢复</string>
+    <string name="notif_action_pause">暂停</string>
+    <string name="notif_action_resume">继续</string>
+    <string name="notif_action_stop">停止</string>
+    <!-- 通知正文：已迁移 3/120 · 已释放 1.2 GB -->
+    <string name="notif_progress_text">已迁移 %1$d/%2$d · 已释放 %3$s</string>
+    <!-- 通知次行：当前文件：IMG_0001.jpg -->
+    <string name="notif_current_file">当前文件：%1$s</string>
+    <string name="notif_waiting_reason">暂停原因：%1$s</string>
+    <string name="notif_failed_count">失败 %1$d 个（本地已保留）</string>
+
+    <!-- ============ 通用动作 ============ -->
+    <string name="action_ok">确定</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_save">保存</string>
+    <string name="action_delete">删除</string>
+    <string name="action_edit">编辑</string>
+    <string name="action_add">新增</string>
+    <string name="action_test">测试连接</string>
+    <string name="action_retry">重试</string>
+    <string name="action_clear">清空</string>
+    <string name="action_close">关闭</string>
+    <string name="action_back">返回</string>
+
+    <!-- ============ 权限说明 ============ -->
+    <string name="perm_media_title">需要读取相册权限</string>
+    <string name="perm_media_desc">用于读取本地照片/视频并统计待迁移数据，仅在本机使用，不上传任何信息到第三方。</string>
+    <string name="perm_grant">去授权</string>
+    <string name="perm_manage_storage_title">需要「所有文件访问」权限</string>
+    <string name="perm_manage_storage_desc">Android 11+ 删除相册原图必须一次性授权「所有文件访问」，本应用仍严格通过 MediaStore 接口操作，不裸访问文件路径。</string>
+    <string name="perm_manage_storage_go">去开启所有文件访问</string>
+    <string name="perm_notification_title">需要通知权限</string>
+    <string name="perm_notification_desc">用于在前台服务通知栏展示迁移进度。</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  前台服务专用字符串（阶段3 业务层作用域）。
+  说明：已有的 notif_* / action_* 字符串在 values/strings.xml（UI 队友作用域），本文件不修改它，
+  只补充本模块新增的少量文案，避免与 UI 的 strings.xml 产生写冲突。
+-->
+<resources>
+    <!-- 服务刚启动、引擎尚未上报第一个状态时 -->
+    <string name="svc_notif_title_preparing">正在准备迁移</string>
+    <string name="svc_notif_text_preparing">正在连接 NAS 并扫描待迁移文件…</string>
+
+    <!-- 通知展开后的补充信息 -->
+    <string name="svc_notif_stage">阶段：%1$s</string>
+    <string name="svc_notif_retry">已重试 %1$d 次</string>
+    <string name="svc_notif_nas_free_space">NAS 剩余空间：%1$s</string>
+    <string name="svc_notif_stopping">正在停止（不会删除未校验完成的文件）…</string>
+    <string name="svc_notif_no_notification_permission">通知权限未授权，进度通知不可见（迁移仍会继续）</string>
+</resources>

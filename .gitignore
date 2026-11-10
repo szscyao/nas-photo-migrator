@@ -1,0 +1,21 @@
+# ============================================================================
+# Android Studio / Gradle 生成物
+# ============================================================================
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+app/build/
+app/schemas/
+build/
+.kotlin/
+
+# 构建/审阅临时目录（不属于交付物）
+/build-toolchain/
+*toolchain*.zip

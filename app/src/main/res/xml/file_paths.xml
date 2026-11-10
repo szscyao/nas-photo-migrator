@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- 仅暴露应用私有 files/logs 与 cache/logs 目录（日志导出用） -->
+    <files-path
+        name="files_logs"
+        path="logs/" />
+    <cache-path
+        name="cache_logs"
+        path="logs/" />
+</paths>
