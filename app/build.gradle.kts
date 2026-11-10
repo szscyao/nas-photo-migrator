@@ -1,3 +1,5 @@
+import java.util.Properties
+
 // ============================================================================
 // app 模块构建脚本
 // ----------------------------------------------------------------------------
@@ -43,11 +45,39 @@ android {
         freeCompilerArgs = freeCompilerArgs + listOf("-Xjvm-default=all")
     }
 
+    // ---------------- Release 签名配置 ----------------
+    // 私密信息放在工程根目录的 keystore.properties（已被 .gitignore 排除，禁止提交/外发）。
+    // 若该文件不存在（例如他人 clone 工程），自动跳过签名，release 产物为 unsigned，
+    // 不影响 assembleDebug 与日常开发。
+    val keystorePropertiesFile = rootProject.file("keystore.properties")
+    val keystoreProperties = Properties().apply {
+        if (keystorePropertiesFile.exists()) {
+            keystorePropertiesFile.inputStream().use { load(it) }
+        }
+    }
+
+    signingConfigs {
+        if (keystorePropertiesFile.exists()) {
+            create("release") {
+                storeFile = rootProject.file(keystoreProperties.getProperty("storeFile"))
+                storePassword = keystoreProperties.getProperty("storePassword")
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            // 默认关闭 R8：本工具依赖大量反射型库（jcifs-ng / simple-xml / Tink / Room），
+            // 未在真机做完整回归前保持关闭，避免 release 运行期踩混淆坑。
             isMinifyEnabled = false
             isShrinkResources = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            // 有签名配置就用它（未配置时保持 unsigned，构建不会失败）
+            if (keystorePropertiesFile.exists()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
         debug {
             applicationIdSuffix = ".debug"

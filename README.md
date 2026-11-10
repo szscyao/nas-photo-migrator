@@ -218,6 +218,31 @@ app/build/outputs/apk/debug/app-debug.apk
 gradlew.bat :app:testDebugUnitTest
 ```
 
+### 生成 Release 签名包
+
+工程已配置好 release 签名（读取根目录 `keystore.properties`，该文件与 `keystore/` 目录均已在 `.gitignore` 中排除）：
+
+```bash
+gradlew.bat :app:assembleRelease
+# 产物：app/build/outputs/apk/release/app-release.apk
+```
+
+安装包不入库（`.gitignore` 已排除 `/release/`），可直接从 Releases 页面下载已验证的发布包：
+[**NAS-Photo-Migrator v1.1.0 正式签名包**](https://github.com/szscyao/nas-photo-migrator/releases/tag/v1.1.0)（GitHub 附件名 `app-release.apk`）
+（包名 `com.nasphoto.migrator`，versionCode 2 / versionName 1.1.0，minSdk 29 / targetSdk 35，
+APK Signature Scheme v2 已签名，约 50.2 MB）。
+
+| 签名信息 | 值 |
+|---|---|
+| 证书 DN | `CN=NAS Photo Migrator, OU=Personal, O=NAS Photo Migrator, L=Local, ST=Local, C=CN` |
+| 证书 SHA-256 | `7f2ab279f047f169590661c7e88b93c5c9bf3147a240881ded71df1ee2f748c8` |
+| keystore | `keystore/nas-photo-migrator-release.jks`（PKCS12，别名 `nasmigrator`，有效期 30 年） |
+| 密码配置 | `keystore.properties`（本机私密文件，**禁止提交/外发**） |
+
+> ⚠️ **请务必备份 `keystore/nas-photo-migrator-release.jks` 与 `keystore.properties`**：丢失后将无法对已安装的 App 做覆盖升级（只能卸载重装，且迁移记录/我的设备等本地数据会清空）。
+> release 包与 debug 包（`com.nasphoto.migrator.debug`）签名与包名都不同，可以并存安装。
+> 出于运行期稳定性考虑，release 默认 **未开启 R8 混淆**（`isMinifyEnabled = false`）；`proguard-rules.pro` 已备好，真机回归后可自行开启。
+
 ### 构建与实测记录（v1.1.0）
 
 | 项 | 结果 |
