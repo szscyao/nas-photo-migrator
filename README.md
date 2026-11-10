@@ -1,6 +1,7 @@
 # 相册逐张边传边删迁移 NAS 工具（NAS Photo Migrator）
 
 > Android 原生（Kotlin）· minSdk 29（Android 10）· SMB/CIFS + WebDAV · 纯本地、无账号、不联网除 NAS 之外任何地址
+> 许可证：[Apache License 2.0](LICENSE) · 持续集成：[Android CI](.github/workflows/android-ci.yml)
 > 包名：`com.nasphoto.migrator`
 
 ---
@@ -208,17 +209,17 @@ gradlew.bat :app:testDebugUnitTest
 | 单元测试 | 45 个纯 JVM 用例全部通过（网段计算、IP 列表排除本机、认证失败分类、配置字段拼装、fileKey、远程路径等） |
 | 产物 | `app/build/outputs/apk/debug/app-debug.apk`（versionCode 2 / versionName 1.1.0，约 66.5 MB） |
 
-**局域网扫描实测**（本机 PC 复刻 App 内 `SubnetScanner` 算法，PC 与手机算法一致）：
-- 环境：家庭 WiFi，本机 `192.168.1.48/24`，扫描 `192.168.1.1~192.168.1.254`（排除本机共 253 个地址）；
+**局域网扫描实测**（在开发者家庭 WiFi 中实测；下表地址与设备名已脱敏）：
+- 环境：家庭 WiFi，本机 `192.168.1.x/24`，扫描 `192.168.1.1~192.168.1.254`（排除本机共 253 个地址）；
 - 参数：并发 32、单 IP 连接超时 800ms、整轮上限 15s；
-- 结果：**耗时 6.51 秒**完成 253 个地址，发现 **3 台 445 端口开放**主机（`192.168.1.1`、`192.168.1.37`、`192.168.1.111`）；
-- **SMB 交互验证（用 App 内生产代码 `JcifsSmbBrowser` 直接跑真实局域网，非算法复刻）**：
-  | 主机 | `hostName()` | `probe()` | `listShares()` |
+- 结果：**耗时 6.51 秒**完成 253 个地址，发现 **3 台 445 端口开放**主机；
+- **SMB 交互验证（用 App 内生产代码 `JcifsSmbBrowser` 跑真实局域网，非算法复刻）**：
+  | 主机（脱敏） | `hostName()` | `probe()` | `listShares()` |
   |------|--------------|-----------|----------------|
-  | 192.168.1.37 | `JACKDISK`（NetBIOS，230ms） | `needsAuth=true`，626ms | 抛 `AUTH_REQUIRED`（Logon failure）→ UI 弹认证框 |
-  | 192.168.1.111 | `SZEIGHTY`（NetBIOS，1ms） | `needsAuth=true`，27ms | 抛 `AUTH_REQUIRED` → UI 弹认证框 |
-  | 192.168.1.1 | `SMBSHARE`（445 开放但非可用 SMB 服务） | 抛 `HOST_UNREACHABLE`（Failed to connect） | 抛 `HOST_UNREACHABLE` |
-- 结论：设备名补全（NetBIOS）、「需要账号密码」判定、不可达分类三条链路均按设计工作；带账号密码的浏览链路需真机 + 真实 NAS 凭据验证（本机未知密码，未测）。
+  | 192.168.1.10 | `NAS-A`（NetBIOS，230ms） | `needsAuth=true`，626ms | 抛 `AUTH_REQUIRED`（Logon failure）→ UI 弹认证框 |
+  | 192.168.1.11 | `NAS-B`（NetBIOS，1ms） | `needsAuth=true`，27ms | 抛 `AUTH_REQUIRED` → UI 弹认证框 |
+  | 192.168.1.1 | `ROUTER-SHARE`（445 开放但非可用 SMB 服务） | 抛 `HOST_UNREACHABLE`（Failed to connect） | 抛 `HOST_UNREACHABLE` |
+- 结论：设备名补全（NetBIOS）、「需要账号密码」判定、不可达分类三条链路均按设计工作；带账号密码的浏览链路需真机 + 真实 NAS 凭据验证。
 
 > 依赖下载：首次构建需联网（`jcifs-ng` 来自 Maven Central；`sardine-android` 只在 JitPack，工程已配置仓库）。国内网络较慢时可自备镜像/代理。
 

@@ -19,3 +19,10 @@ build/
 # 构建/审阅临时目录（不属于交付物）
 /build-toolchain/
 *toolchain*.zip
+
+# 签名与发布产物（禁止入库，防止密钥泄露）
+*.jks
+*.keystore
+*.apk
+*.aab
+/release/
