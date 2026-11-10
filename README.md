@@ -2,6 +2,10 @@
 
 > Android 原生（Kotlin）· minSdk 29（Android 10）· SMB/CIFS + WebDAV · 纯本地、无账号、不联网除 NAS 之外任何地址
 > 许可证：[Apache License 2.0](LICENSE) · 持续集成：[Android CI](.github/workflows/android-ci.yml)
+>
+> ⚠️ **免责声明（必读）**：本工具在「上传成功 + 完整性校验通过」后**删除手机本地原图**，属不可逆操作。
+> 首次使用请先用 10~20 个文件试跑，确认 NAS 端文件可正常打开且大小一致；批量使用前请自行做好备份。
+> 本软件按「现状」提供，不附带任何明示或暗示担保，作者不对任何数据丢失承担责任。
 > 包名：`com.nasphoto.migrator`
 
 ---
